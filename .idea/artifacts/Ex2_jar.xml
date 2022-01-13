@@ -3,8 +3,8 @@
     <output-path>$PROJECT_DIR$/out/artifacts/Ex2_jar</output-path>
     <root id="archive" name="Ex2.jar">
       <element id="module-output" name="Ex2" />
-      <element id="library" level="project" name="guava-30.1.1-jre" />
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/gson-2.8.9.jar" path-in-jar="/" />
+      <element id="library" level="project" name="guava-30.1.1-jre" />
     </root>
   </artifact>
 </component>

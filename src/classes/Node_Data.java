@@ -3,6 +3,9 @@ package classes;
 import api.GeoLocation;
 import api.NodeData;
 
+/**
+ * This class represents each node in the graph
+ */
 public class Node_Data implements NodeData {
     private int id;
     private Geo_Location my_location;
@@ -10,10 +13,28 @@ public class Node_Data implements NodeData {
     private int tag;
     private String info;
 
+    /**
+     * This is a constructor for the node
+     * @param id get the id for the new node
+     * @param pos get the node position
+     */
     public Node_Data(int id, String pos) {
         this.id = id;
         String[] arr = pos.split(",");
         this.my_location = new Geo_Location(Double.parseDouble(arr[0]), Double.parseDouble(arr[1]), Double.parseDouble(arr[2]));
+        this.weight = 0;
+        this.info = "";
+        this.tag = 0;
+    }
+
+    /**
+     * This is a constructor for the node
+     * @param id get the id for the new node
+     * @param gl get the node position
+     */
+    public Node_Data(int id, Geo_Location gl) {
+        this.id = id;
+        this.my_location = gl;
         this.weight = 0;
         this.info = "";
         this.tag = 0;

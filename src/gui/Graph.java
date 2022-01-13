@@ -16,6 +16,9 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * This class represents the GUI that we are working on
+ */
 public class Graph extends JFrame implements ActionListener {
     private final int width;
     private final int height;
@@ -39,9 +42,16 @@ public class Graph extends JFrame implements ActionListener {
     JPanel buttonsPanel = new JPanel();
     JPanel graphPanel = new JPanel();
 
+    /**
+     * This is the constructor for our graph that setts all the things we need for it to work
+     * @param alg This is the algorithms of the graph that we are working on
+     */
     public Graph(DirectedWeightedGraphAlgorithms alg) {
         DWG_Algo = alg;
 
+        /**
+         * Here we are sitting all the buttons for the graph
+         */
         isConnected.setText("Check if the graph is connected");
         isConnected.setBounds(0, 0, 250, 50);
         isConnected.addActionListener(this);
@@ -86,16 +96,23 @@ public class Graph extends JFrame implements ActionListener {
         removeEdge.setBounds(1575, 0, 125, 50);
         removeEdge.addActionListener(this);
 
-
+        /**
+         * Here we are dividing the graph into 2 panels:
+         * Upper one for the buttons
+         * The one on the bottom is for the graph itself
+         */
         buttonsPanel.setBackground(Color.BLACK);
         buttonsPanel.setBounds(0, 0, 1700, 100);
         buttonsPanel.setLayout(null);
-
 
         graphPanel.setBackground(Color.BLACK);
         graphPanel.setBounds(0, 100, 1700, 800);
         graphPanel.setLayout(null);
 
+        /**
+         * Sitting the basic things for the graph title, layout, screen size, background, default close operation
+         * and adding all the buttons to the button panel
+         */
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Directed Weight Graph");
         this.setLayout(null);
@@ -125,6 +142,11 @@ public class Graph extends JFrame implements ActionListener {
         this.add(graphPanel);
     }
 
+    /**
+     * Here we are overriding the function of actionPerformed to use for the events that occurred on the graph:
+     * Basically we are just using all the function that we wrote and elaborated in the classes
+     * @param e The event that happened
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == isConnected) {
@@ -238,6 +260,12 @@ public class Graph extends JFrame implements ActionListener {
         }
     }
 
+    /**
+     * Here we are overriding the function of paint, so we can paint the graph with the coordinates that we want to
+     * we need to set a scale for the nodes positions, so we could see them on the graph, so we used this scale
+     * to paint the nodes and edges
+     * @param g The Graphics object
+     */
     @Override
     public void paint(Graphics g) {
         buttonsPanel.updateUI();

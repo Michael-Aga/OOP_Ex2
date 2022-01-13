@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * This class has the loading function to load a graph from the json file
+ */
 public class Load {
     public static Values load(String json_file) {
         File input = new File(json_file);
@@ -84,6 +87,11 @@ public class Load {
         return null;
     }
 
+    /**
+     * This function converts the data from the json file to get the nodes as an object
+     * @param nodeList a parameter that goes on all the nodes of the data
+     * @return A hash map of the nodes
+     */
     public static HashMap<Integer, NodeData> convertNodesList(List<NodeData> nodeList) {
         HashMap<Integer, NodeData> nodes = new HashMap<>();
         for (NodeData node : nodeList) {
@@ -92,6 +100,11 @@ public class Load {
         return nodes;
     }
 
+    /**
+     * This function converts the data from the json file to get the to edges as an object
+     * @param edgeList a parameter that goes on all the to edges of the data
+     * @return a hash map of the to edges
+     */
     public static HashMap<Integer, HashMap<Integer, EdgeData>> convertToEdge(List<EdgeData> edgeList) {
         HashMap<Integer, HashMap<Integer, EdgeData>> toMap = new HashMap<>();
         HashMap<Integer, EdgeData> edgeHash = new HashMap<>();
@@ -115,6 +128,11 @@ public class Load {
         return toMap;
     }
 
+    /**
+     * This function converts the data from the json file to get the from edges as an object
+     * @param edgeList a parameter that goes on all the from edges of the data
+     * @return a hash map of the from edges
+     */
     public static HashMap<Integer, HashMap<Integer, EdgeData>> convertFromEdge(List<EdgeData> edgeList) {
         HashMap<Integer, HashMap<Integer, EdgeData>> fromMap = new HashMap<>();
         HashMap<Integer, EdgeData> edgeHash = new HashMap<>();

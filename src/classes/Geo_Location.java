@@ -2,6 +2,9 @@ package classes;
 
 import api.GeoLocation;
 
+/**
+ * This class represents the location of each node with his (x,y,z)
+ */
 public class Geo_Location implements GeoLocation {
     private double x = 0;
     private double y = 0;
@@ -40,6 +43,11 @@ public class Geo_Location implements GeoLocation {
         return this.z;
     }
 
+    /**
+     * This function calculates the distance between 2 nodes
+     * @param g is a location that we get from the user that we calculate the distance to
+     * @return the distance between 2 nodes
+     */
     @Override
     public double distance(GeoLocation g) {
 

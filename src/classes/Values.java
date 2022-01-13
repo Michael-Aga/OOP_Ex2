@@ -5,6 +5,9 @@ import api.NodeData;
 
 import java.util.HashMap;
 
+/**
+ * This class is for the 3 hash maps that we have
+ */
 public class Values {
     public HashMap<Integer, NodeData> Node_Data = new HashMap<>();
     public HashMap<Integer, HashMap<Integer, EdgeData>> toEdges = new HashMap<>();

@@ -2,6 +2,11 @@ package classes;
 
 import api.EdgeData;
 
+import java.util.Objects;
+
+/**
+ * This is the class that represents each edge in the graph
+ */
 public class Edge_Data implements EdgeData {
     private int src;
     private int dest;
@@ -9,6 +14,12 @@ public class Edge_Data implements EdgeData {
     private String Info;
     private int Tag;
 
+    /**
+     * This is a constructor for each edge
+     * @param src the src node id
+     * @param dest the dest node id
+     * @param weight the weight of the edge
+     */
     public Edge_Data(int src, int dest, double weight) {
         this.src = src;
         this.dest = dest;
@@ -48,5 +59,17 @@ public class Edge_Data implements EdgeData {
     @Override
     public void setTag(int t) {
         Tag = t;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Edge_Data edge = (Edge_Data) o;
+        return src == edge.src &&
+                dest == edge.dest &&
+                Double.compare(edge.w, w) == 0 &&
+                Tag == edge.Tag &&
+                Objects.equals(Info, edge.Info);
     }
 }

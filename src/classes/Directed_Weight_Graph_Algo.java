@@ -7,23 +7,41 @@ import api.NodeData;
 
 import java.util.*;
 
+/**
+ * This class represents our algorithm that works on the graph
+ */
 public class Directed_Weight_Graph_Algo implements DirectedWeightedGraphAlgorithms {
     private DirectedWeightedGraph G;
 
+    /**
+     * This is an empty constructor for the graph
+     */
     public Directed_Weight_Graph_Algo() {
         this.G = new Directed_Weighted_Graph();
     }
 
+    /**
+     * A function to init the graph
+     * @param g A graph that we are working on
+     */
     @Override
     public void init(DirectedWeightedGraph g) {
         this.G = g;
     }
 
+    /**
+     * Get the graph we are working on
+     * @return The graph that we are working on
+     */
     @Override
     public DirectedWeightedGraph getGraph() {
         return this.G;
     }
 
+    /**
+     * This function makes a copy of the graph that we are working on
+     * @return The copy of the graph
+     */
     @Override
     public DirectedWeightedGraph copy() {
         DirectedWeightedGraph g = new Directed_Weighted_Graph();
@@ -44,6 +62,11 @@ public class Directed_Weight_Graph_Algo implements DirectedWeightedGraphAlgorith
         return g;
     }
 
+    /**
+     * Returns true if and only if (iff) there is a valid path from each node to each
+     * other node. NOTE: assume directional graph (all n*(n-1) ordered pairs).
+     * @return True if the graph is connected and false if it's not
+     */
     @Override
     public boolean isConnected() {
 
@@ -133,6 +156,12 @@ public class Directed_Weight_Graph_Algo implements DirectedWeightedGraphAlgorith
         return b;
     }
 
+    /**
+     * Computes the length of the shortest path between src to dest
+     * Note: if no such path --> returns -1
+     * @param src - start node
+     * @param dest - end (target) node
+     */
     @Override
     public double shortestPathDist(int src, int dest) {
         if (G.getNode(src) == null || G.getNode(dest) == null)
@@ -169,6 +198,15 @@ public class Directed_Weight_Graph_Algo implements DirectedWeightedGraphAlgorith
         return G.getNode(dest).getWeight();
     }
 
+    /**
+     * Computes the the shortest path between src to dest - as an ordered List of nodes:
+     * src--> n1-->n2-->...dest
+     * see: https://en.wikipedia.org/wiki/Shortest_path_problem
+     * Note if no such path --> returns null;
+     * @param src - start node
+     * @param dest - end (target) node
+     * @return
+     */
     @Override
     public List<NodeData> shortestPath(int src, int dest) {
         if (G.getNode(src) == null || G.getNode(dest) == null)
@@ -223,6 +261,11 @@ public class Directed_Weight_Graph_Algo implements DirectedWeightedGraphAlgorith
         return second_list;
     }
 
+    /**
+     * Finds the api.NodeData which minimizes the max distance to all the other nodes.
+     * Assuming the graph isConnected, elese return null. See: https://en.wikipedia.org/wiki/Graph_center
+     * @return the Node data to which the max shortest path to all the other nodes is minimized.
+     */
     @Override
     public NodeData center() {
         if (!isConnected()) {
@@ -254,6 +297,12 @@ public class Directed_Weight_Graph_Algo implements DirectedWeightedGraphAlgorith
         return G.getNode(key);
     }
 
+    /**
+     * Computes a list of consecutive nodes which go over all the nodes in cities.
+     * the sum of the weights of all the consecutive (pairs) of nodes (directed) is the "cost" of the solution -
+     * the lower the better.
+     * See: https://en.wikipedia.org/wiki/Travelling_salesman_problem
+     */
     @Override
     public List<NodeData> tsp(List<NodeData> cities) {
         if (cities == null || cities.isEmpty()) return null;
@@ -278,11 +327,25 @@ public class Directed_Weight_Graph_Algo implements DirectedWeightedGraphAlgorith
         return best_tsp;
     }
 
+    /**
+     * Saves this weighted (directed) graph to the given
+     * file name - in JSON format
+     * @param file - the file name (may include a relative path).
+     * @return true - if the file was successfully saved
+     */
     @Override
     public boolean save(String file) {
         return Save.save(file, getGraph());
     }
 
+    /**
+     * This method loads a graph to this graph algorithm.
+     * if the file was successfully loaded - the underlying graph
+     * of this class will be changed (to the loaded one), in case the
+     * graph was not loaded the original graph should remain "as is".
+     * @param file - file name of JSON file
+     * @return true - if the graph was successfully loaded.
+     */
     @Override
     public boolean load(String file) {
         try {
@@ -296,6 +359,9 @@ public class Directed_Weight_Graph_Algo implements DirectedWeightedGraphAlgorith
         return true;
     }
 
+    /**
+     * This is a function to compare 2 nodes by their weight
+     */
     private static class comp implements Comparator<NodeData> {
         @Override
         public int compare(NodeData o1, NodeData o2) {
