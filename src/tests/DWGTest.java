@@ -1,7 +1,6 @@
 package tests;
 
 import classes.Edge_Data;
-import classes.Geo_Location;
 import classes.Node_Data;
 import classes.Directed_Weighted_Graph;
 import api.EdgeData;
@@ -15,126 +14,136 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DWGTest {
-
-    private static Node_Data n1, n2, n3, n4, n5, n6;
+    private static Node_Data firstNode, secondNode, thirdNode, forthNode, fifthNode, sixNode;
 
     /**
-     * check that the address are different
-     * check that hashmaps are different address
+     * Test the getNode function
      */
-
     @Test
     @Timeout(value = 2, unit = TimeUnit.MILLISECONDS)
-    void getNode() {
-        Directed_Weighted_Graph graph = new Directed_Weighted_Graph();
+    void getNodetest() {
+        Directed_Weighted_Graph getNodeDWG = new Directed_Weighted_Graph();
 
-        n1 = new Node_Data(1, "1,2,3");
-        graph.addNode(n1);
-        assertEquals(n1, graph.getNode(1));
-        assertEquals(1, graph.nodeSize());
+        firstNode = new Node_Data(1, "1,2,3");
+        getNodeDWG.addNode(firstNode);
+        assertEquals(firstNode, getNodeDWG.getNode(1));
+        assertEquals(1, getNodeDWG.nodeSize());
     }
 
+    /**
+     * Test the getEdge function
+     */
     @Test
-    void getEdge() {
-        Directed_Weighted_Graph graph = new Directed_Weighted_Graph();
+    void getEdgetest() {
+        Directed_Weighted_Graph getEdgeDWG = new Directed_Weighted_Graph();
 
-        n1 = new Node_Data(1, "1,2,3");
-        n2 = new Node_Data(2, "2,1,3");
-        n3 = new Node_Data(3, "-4,7,1");
-        n4 = new Node_Data(4, "-5, 8, 2");
+        firstNode = new Node_Data(1, "1,2,3");
+        secondNode = new Node_Data(2, "2,1,3");
+        thirdNode = new Node_Data(3, "-4,7,1");
+        forthNode = new Node_Data(4, "-5, 8, 2");
 
-        graph.addNode(n1);
-        graph.addNode(n2);
-        graph.addNode(n3);
-        graph.addNode(n4);
+        getEdgeDWG.addNode(firstNode);
+        getEdgeDWG.addNode(secondNode);
+        getEdgeDWG.addNode(thirdNode);
+        getEdgeDWG.addNode(forthNode);
 
-        graph.connect(n1.getKey(), n3.getKey(), 1.1);
-        graph.connect(n2.getKey(), n4.getKey(), 1.2);
+        getEdgeDWG.connect(firstNode.getKey(), thirdNode.getKey(), 1.1);
+        getEdgeDWG.connect(secondNode.getKey(), forthNode.getKey(), 1.2);
 
-        assertEquals(new Edge_Data(1, 3, 1.1), graph.getEdge(1, 3));
-        assertEquals(new Edge_Data(2, 4, 1.2), graph.getEdge(2, 4));
+        assertEquals(new Edge_Data(1, 3, 1.1), getEdgeDWG.getEdge(1, 3));
+        assertEquals(new Edge_Data(2, 4, 1.2), getEdgeDWG.getEdge(2, 4));
 
     }
 
+    /**
+     * Test the connect function
+     */
     @Test
-    void connect() {
-        Directed_Weighted_Graph graph = new Directed_Weighted_Graph();
+    void connecttest() {
+        Directed_Weighted_Graph connectDWG = new Directed_Weighted_Graph();
 
-        n1 = new Node_Data(1, "1,2,3");
-        n2 = new Node_Data(2, "2,1,3");
+        firstNode = new Node_Data(1, "1,2,3");
+        secondNode = new Node_Data(2, "2,1,3");
 
-        graph.addNode(n1);
-        graph.addNode(n2);
-        graph.connect(1, 2, 1.0);
-        assertEquals(1, graph.edgeSize());
-        assertEquals(new Edge_Data(1, 2, 1.0), graph.getEdge(1, 2));
+        connectDWG.addNode(firstNode);
+        connectDWG.addNode(secondNode);
+        connectDWG.connect(1, 2, 1.0);
+        assertEquals(1, connectDWG.edgeSize());
+        assertEquals(new Edge_Data(1, 2, 1.0), connectDWG.getEdge(1, 2));
     }
 
+    /**
+     * Test the node iterator
+     */
     @Test
-    void nodeIter() {
-        Directed_Weighted_Graph graph = new Directed_Weighted_Graph();
+    void nodeIteratortest() {
+        Directed_Weighted_Graph nodeIterDWG = new Directed_Weighted_Graph();
 
-        n1 = new Node_Data(1, "1,2,3");
-        n2 = new Node_Data(2, "2,1,3");
+        firstNode = new Node_Data(1, "1,2,3");
+        secondNode = new Node_Data(2, "2,1,3");
 
-        graph.addNode(n1);
-        graph.addNode(n2);
+        nodeIterDWG.addNode(firstNode);
+        nodeIterDWG.addNode(secondNode);
 
-        Iterator<NodeData> iterator = graph.nodeIter();
-        int count = 0;
+        Iterator<NodeData> iterator = nodeIterDWG.nodeIter();
+        int nodeCounter = 0;
         while (iterator.hasNext()) {
-            count++;
+            nodeCounter++;
             iterator.next();
         }
-        assertEquals(count, 2);
+        assertEquals(nodeCounter, 2);
     }
 
+    /**
+     * Test the edge iterator
+     */
     @Test
-    void edgeIter() {
+    void edgeIteratortest() {
+        Directed_Weighted_Graph edgeIterDWG = new Directed_Weighted_Graph();
 
-        Directed_Weighted_Graph graph = new Directed_Weighted_Graph();
+        firstNode = new Node_Data(1, "1,2,3");
+        secondNode = new Node_Data(2, "2,1,3");
+        thirdNode = new Node_Data(3, "-4,7,1");
+        forthNode = new Node_Data(4, "-5,8,2");
 
-        n1 = new Node_Data(1, "1,2,3");
-        n2 = new Node_Data(2, "2,1,3");
-        n3 = new Node_Data(3, "-4,7,1");
-        n4 = new Node_Data(4, "-5,8,2");
+        edgeIterDWG.addNode(firstNode);
+        edgeIterDWG.addNode(secondNode);
+        edgeIterDWG.addNode(thirdNode);
+        edgeIterDWG.addNode(forthNode);
 
-        graph.addNode(n1);
-        graph.addNode(n2);
-        graph.addNode(n3);
-        graph.addNode(n4);
+        edgeIterDWG.connect(firstNode.getKey(), thirdNode.getKey(), 1.1);
+        edgeIterDWG.connect(secondNode.getKey(), forthNode.getKey(), 1.2);
 
-        graph.connect(n1.getKey(), n3.getKey(), 1.1);
-        graph.connect(n2.getKey(), n4.getKey(), 1.2);
-
-        Iterator<EdgeData> iterator = graph.edgeIter();
-        int count = 0;
+        Iterator<EdgeData> iterator = edgeIterDWG.edgeIter();
+        int edgeCount = 0;
         while (iterator.hasNext()) {
-            count++;
+            edgeCount++;
             iterator.next();
         }
-        assertEquals(count, 2);
+        assertEquals(edgeCount, 2);
     }
 
+    /**
+     * Test the both node and edge iterator
+     */
     @Test
-    void testEdgeIterNodeID() {
+    void testEdgeIterNodeIDtest() {
+        Directed_Weighted_Graph bothDWG = new Directed_Weighted_Graph();
 
-        Directed_Weighted_Graph graph = new Directed_Weighted_Graph();
+        firstNode = new Node_Data(1, "1,2,3");
+        secondNode = new Node_Data(2, "2,1,3");
+        thirdNode = new Node_Data(3, "-4,7,1");
+        forthNode = new Node_Data(4, "-5,8,2");
 
-        n1 = new Node_Data(1, "1,2,3");
-        n2 = new Node_Data(2, "2,1,3");
-        n3 = new Node_Data(3, "-4,7,1");
-        n4 = new Node_Data(4, "-5,8,2");
+        bothDWG.addNode(firstNode);
+        bothDWG.addNode(secondNode);
+        bothDWG.addNode(thirdNode);
+        bothDWG.addNode(forthNode);
 
-        graph.addNode(n1);
-        graph.addNode(n2);
-        graph.addNode(n3);
-        graph.addNode(n4);
+        bothDWG.connect(firstNode.getKey(), thirdNode.getKey(), 1.2);
+        bothDWG.connect(firstNode.getKey(), forthNode.getKey(), 1.4);
 
-        graph.connect(n1.getKey(), n3.getKey(), 1.2);
-        graph.connect(n1.getKey(), n4.getKey(), 1.4);
-
-        Iterator<EdgeData> iterator = graph.edgeIter(n1.getKey());
+        Iterator<EdgeData> iterator = bothDWG.edgeIter(firstNode.getKey());
         int count = 0;
         while (iterator.hasNext()) {
             count++;
@@ -144,118 +153,130 @@ class DWGTest {
         assertEquals(2, count);
     }
 
+    /**
+     * Test the removeNode function
+     */
     @Test
-    void removeNode() {
-        n1 = new Node_Data(1, "1, 2, 3");
-        n2 = new Node_Data(2, "2, 1, 3");
-        n3 = new Node_Data(3, "-4, 7, 1");
-        n4 = new Node_Data(4, "-5, 8, 2");
-        n5 = new Node_Data(5, "-3, 6, 4");
-        n6 = new Node_Data(6, "-1, 5, 4");
+    void removeNodetest() {
+        firstNode = new Node_Data(1, "1, 2, 3");
+        secondNode = new Node_Data(2, "2, 1, 3");
+        thirdNode = new Node_Data(3, "-4, 7, 1");
+        forthNode = new Node_Data(4, "-5, 8, 2");
+        fifthNode = new Node_Data(5, "-3, 6, 4");
+        sixNode = new Node_Data(6, "-1, 5, 4");
 
-        Directed_Weighted_Graph graph = new Directed_Weighted_Graph();
-        graph.addNode(n1);
-        graph.addNode(n2);
-        graph.addNode(n3);
-        graph.addNode(n4);
-        graph.addNode(n5);
-        graph.addNode(n6);
-        assertEquals(6, graph.nodeSize());
-        assertEquals(n5, graph.getNode(5));
-        graph.removeNode(5);
-        assertEquals(5, graph.nodeSize());
-        assertNull(graph.getNode(5));
+        Directed_Weighted_Graph removeNodeDWG = new Directed_Weighted_Graph();
+        removeNodeDWG.addNode(firstNode);
+        removeNodeDWG.addNode(secondNode);
+        removeNodeDWG.addNode(thirdNode);
+        removeNodeDWG.addNode(forthNode);
+        removeNodeDWG.addNode(fifthNode);
+        removeNodeDWG.addNode(sixNode);
+        assertEquals(6, removeNodeDWG.nodeSize());
+        assertEquals(fifthNode, removeNodeDWG.getNode(5));
+        removeNodeDWG.removeNode(5);
+        assertEquals(5, removeNodeDWG.nodeSize());
+        assertNull(removeNodeDWG.getNode(5));
     }
 
     @Test
-    void removeEdge() {
-        n1 = new Node_Data(1,"1, 2, 3");
-        n2 = new Node_Data(2,"2, 1, 3");
-        n3 = new Node_Data(3,"-4, 7, 1");
-        n4 = new Node_Data(4,"-5, 8, 2");
-        n5 = new Node_Data(5,"-3, 6, 4");
-        n6 = new Node_Data(6,"-1, 5, 4");
+    void removeEdgetest() {
+        firstNode = new Node_Data(1,"1, 2, 3");
+        secondNode = new Node_Data(2,"2, 1, 3");
+        thirdNode = new Node_Data(3,"-4, 7, 1");
+        forthNode = new Node_Data(4,"-5, 8, 2");
+        fifthNode = new Node_Data(5,"-3, 6, 4");
+        sixNode = new Node_Data(6,"-1, 5, 4");
 
-        Directed_Weighted_Graph graph = new Directed_Weighted_Graph();
-        graph.addNode(n1);
-        graph.addNode(n2);
-        graph.addNode(n3);
-        graph.addNode(n4);
-        graph.addNode(n5);
-        graph.addNode(n6);
-        graph.connect(1, 2, 1.0);
-        assertEquals(1, graph.edgeSize());
-        assertEquals(new Edge_Data(1, 2, 1.0), graph.getEdge(1, 2));
-        graph.removeEdge(1, 2);
-        assertEquals(0, graph.edgeSize());
-        assertNull(graph.getEdge(1, 2));
+        Directed_Weighted_Graph removeEdgeDWG = new Directed_Weighted_Graph();
+        removeEdgeDWG.addNode(firstNode);
+        removeEdgeDWG.addNode(secondNode);
+        removeEdgeDWG.addNode(thirdNode);
+        removeEdgeDWG.addNode(forthNode);
+        removeEdgeDWG.addNode(fifthNode);
+        removeEdgeDWG.addNode(sixNode);
+        removeEdgeDWG.connect(1, 2, 1.0);
+        assertEquals(1, removeEdgeDWG.edgeSize());
+        assertEquals(new Edge_Data(1, 2, 1.0), removeEdgeDWG.getEdge(1, 2));
+        removeEdgeDWG.removeEdge(1, 2);
+        assertEquals(0, removeEdgeDWG.edgeSize());
+        assertNull(removeEdgeDWG.getEdge(1, 2));
 
 
     }
 
+    /**
+     * Test the nodeSize function
+     */
     @Test
-    void nodeSize() {
-        n1 = new Node_Data(1, "1, 2, 3");
-        n2 = new Node_Data(2, "2, 1, 3");
-        n3 = new Node_Data(3, "-4, 7, 1");
-        n4 = new Node_Data(4, "-5, 8, 2");
-        n5 = new Node_Data(5, "-3, 6, 4");
-        n6 = new Node_Data(6, "-1, 5, 4");
+    void nodeSizetest() {
+        firstNode = new Node_Data(1, "1, 2, 3");
+        secondNode = new Node_Data(2, "2, 1, 3");
+        thirdNode = new Node_Data(3, "-4, 7, 1");
+        forthNode = new Node_Data(4, "-5, 8, 2");
+        fifthNode = new Node_Data(5, "-3, 6, 4");
+        sixNode = new Node_Data(6, "-1, 5, 4");
 
-        Directed_Weighted_Graph graph = new Directed_Weighted_Graph();
-        graph.addNode(n1);
-        graph.addNode(n2);
-        graph.addNode(n3);
-        graph.addNode(n4);
-        graph.addNode(n5);
-        graph.addNode(n6);
+        Directed_Weighted_Graph nodeSizeDWG = new Directed_Weighted_Graph();
+        nodeSizeDWG.addNode(firstNode);
+        nodeSizeDWG.addNode(secondNode);
+        nodeSizeDWG.addNode(thirdNode);
+        nodeSizeDWG.addNode(forthNode);
+        nodeSizeDWG.addNode(fifthNode);
+        nodeSizeDWG.addNode(sixNode);
 
-        int node_in_graph = graph.nodeSize();
-        assertEquals(node_in_graph, 6);
+        int nodeQuantity = nodeSizeDWG.nodeSize();
+        assertEquals(nodeQuantity, 6);
     }
 
+    /**
+     * Test the edgeSize function
+     */
     @Test
-    void edgeSize() {
-        n1 = new Node_Data(1,"1, 2, 3");
-        n2 = new Node_Data(2,"2, 1, 3");
-        n3 = new Node_Data(3,"-4, 7, 1");
-        n4 = new Node_Data(4,"-5, 8, 2");
-        n5 = new Node_Data(5,"-3, 6, 4");
-        n6 = new Node_Data(6,"-1, 5, 4");
+    void edgeSizetest() {
+        firstNode = new Node_Data(1,"1, 2, 3");
+        secondNode = new Node_Data(2,"2, 1, 3");
+        thirdNode = new Node_Data(3,"-4, 7, 1");
+        forthNode = new Node_Data(4,"-5, 8, 2");
+        fifthNode = new Node_Data(5,"-3, 6, 4");
+        sixNode = new Node_Data(6,"-1, 5, 4");
 
-        Directed_Weighted_Graph graph = new Directed_Weighted_Graph();
-        graph.addNode(n1);
-        graph.addNode(n2);
-        graph.addNode(n3);
-        graph.addNode(n4);
-        graph.addNode(n5);
-        graph.addNode(n6);
+        Directed_Weighted_Graph edgeSizeDWG = new Directed_Weighted_Graph();
+        edgeSizeDWG.addNode(firstNode);
+        edgeSizeDWG.addNode(secondNode);
+        edgeSizeDWG.addNode(thirdNode);
+        edgeSizeDWG.addNode(forthNode);
+        edgeSizeDWG.addNode(fifthNode);
+        edgeSizeDWG.addNode(sixNode);
 
-        graph.connect(1, 2, 1.0);
-        graph.connect(1, 3, 1.0);
-        graph.connect(5, 3, 1.0);
+        edgeSizeDWG.connect(1, 2, 1.0);
+        edgeSizeDWG.connect(1, 3, 1.0);
+        edgeSizeDWG.connect(5, 3, 1.0);
 
-        int edges_in_graph = graph.edgeSize();
-        assertEquals(edges_in_graph, 3);
+        int edgeQuantity = edgeSizeDWG.edgeSize();
+        assertEquals(edgeQuantity, 3);
     }
 
+    /**
+     * Test the getMC function
+     */
     @Test
-    void getMC() {
-        n1 = new Node_Data(1, "1, 2, 3");
-        n2 = new Node_Data(2, "2, 1, 3");
-        n3 = new Node_Data(3, "-4, 7, 1");
-        n4 = new Node_Data(4, "-5, 8, 2");
-        n5 = new Node_Data(5, "-3, 6, 4");
-        n6 = new Node_Data(6, "-1, 5, 4");
+    void getMCtest() {
+        firstNode = new Node_Data(1, "1, 2, 3");
+        secondNode = new Node_Data(2, "2, 1, 3");
+        thirdNode = new Node_Data(3, "-4, 7, 1");
+        forthNode = new Node_Data(4, "-5, 8, 2");
+        fifthNode = new Node_Data(5, "-3, 6, 4");
+        sixNode = new Node_Data(6, "-1, 5, 4");
 
-        Directed_Weighted_Graph graph = new Directed_Weighted_Graph();
-        assertEquals(0, graph.getMC());
-        graph.addNode(n1);
-        graph.addNode(n2);
-        graph.addNode(n3);
-        graph.addNode(n4);
-        graph.addNode(n5);
-        graph.addNode(n6);
-        assertEquals(6, graph.getMC());
+        Directed_Weighted_Graph getMCGDW = new Directed_Weighted_Graph();
+        assertEquals(0, getMCGDW.getMC());
+        getMCGDW.addNode(firstNode);
+        getMCGDW.addNode(secondNode);
+        getMCGDW.addNode(thirdNode);
+        getMCGDW.addNode(forthNode);
+        getMCGDW.addNode(fifthNode);
+        getMCGDW.addNode(sixNode);
+        assertEquals(6, getMCGDW.getMC());
     }
 }

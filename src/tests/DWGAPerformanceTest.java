@@ -10,32 +10,34 @@ import java.util.LinkedList;
 import java.util.List;
 
 class DWGAPerformanceTest {
-    static DirectedWeightedGraphAlgorithms GAlgo = new Directed_Weight_Graph_Algo();
+    static DirectedWeightedGraphAlgorithms myGraph = new Directed_Weight_Graph_Algo();
 
+    /**
+     * Load the graph from the data
+     */
     @BeforeAll
     static void setup() {
-        GAlgo.load("data/G1.json");
+        myGraph.load("data/G1.json");
     }
 
     @Test
     void shortestPathDist() {
-        GAlgo.shortestPathDist(1, 10);
+        myGraph.shortestPathDist(1, 10);
     }
 
     @Test
     void shortestPathCenter() {
-      GAlgo.shortestPathDist(1, 120);
+      myGraph.shortestPathDist(1, 120);
     }
 
     @Test
     void tsp() {
-        List<NodeData> list4 = new LinkedList<>();
-        list4.add(GAlgo.getGraph().getNode(0));
-        list4.add(GAlgo.getGraph().getNode(1));
-        list4.add(GAlgo.getGraph().getNode(2));
-        list4.add(GAlgo.getGraph().getNode(3));
-        List<NodeData> ans =  GAlgo.tsp(list4);
+        List<NodeData> tspList = new LinkedList<>();
+        tspList.add(myGraph.getGraph().getNode(0));
+        tspList.add(myGraph.getGraph().getNode(1));
+        tspList.add(myGraph.getGraph().getNode(2));
+        tspList.add(myGraph.getGraph().getNode(3));
+        List<NodeData> ans =  myGraph.tsp(tspList);
         System.out.println(ans.toString());
-
     }
 }

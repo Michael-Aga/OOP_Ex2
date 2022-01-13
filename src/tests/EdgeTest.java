@@ -8,32 +8,47 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class EdgeTest {
 
+    /**
+     * Test the getSrc function
+     */
     @Test
-    void getSrc() {
+    void getSrcTest() {
         EdgeData e = new Edge_Data(1, 2, 3);
         assertEquals(1, e.getSrc());
     }
 
+    /**
+     * Test the getDest function
+     */
     @Test
-    void getDest() {
+    void getDestTest() {
         EdgeData e = new Edge_Data(1, 2, 3);
         assertEquals(2, e.getDest());
     }
 
+    /**
+     * Test the getWeight function
+     */
     @Test
-    void getWeight() {
+    void getWeightTest() {
         EdgeData e = new Edge_Data(1, 2, 3);
         assertEquals(3.0, e.getWeight());
     }
 
+    /**
+     * Test the getInfo function
+     */
     @Test
-    void getInfo() {
+    void getInfoTest() {
         EdgeData e = new Edge_Data(1, 2, 3);
         e.setInfo("white");
         String es = e.getInfo();
         assertEquals("white", es);
     }
 
+    /**
+     * Test the setInfo function
+     */
     @Test
     void setInfo() {
         EdgeData e = new Edge_Data(1, 2, 3);
